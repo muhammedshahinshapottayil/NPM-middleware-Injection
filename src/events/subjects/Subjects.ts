@@ -1,3 +1,3 @@
 export enum Subjects {
-  userCreated = "user:created",
+  getDepartment = "dep&task:getDepartment",
 }
