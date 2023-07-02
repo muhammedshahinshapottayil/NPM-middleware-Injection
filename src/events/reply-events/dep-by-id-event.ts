@@ -1,6 +1,6 @@
 import { Subjects } from "../subjects/Subjects";
 
-export interface UsercreatedEventsReply {
+export interface getDepartmentReply {
   subject: Subjects.getDepartmentReply;
   data: any;
 }
