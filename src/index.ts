@@ -12,5 +12,4 @@ export * from "./events/base-events/base-publisher";
 export * from "./events/created-events/user-created-events";
 export * from "./events/reply-events/dep-by-id-event";
 
-
 export * from "./events/subjects/Subjects";
