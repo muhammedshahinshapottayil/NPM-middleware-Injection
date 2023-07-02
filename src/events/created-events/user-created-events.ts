@@ -5,3 +5,7 @@ export interface UsercreatedEvents {
     department?: number;
   };
 }
+export interface UsercreatedEventsReply {
+  subject: Subjects.getDepartmentReply;
+  data: any;
+}
