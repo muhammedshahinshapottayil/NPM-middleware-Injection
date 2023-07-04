@@ -1,4 +1,3 @@
-import nats from "nats";
 import { Subjects } from "../subjects/Subjects";
 interface Event {
   subject: Subjects;
@@ -12,7 +11,7 @@ export abstract class Publisher<T extends Event> {
   }
   async publish(data: T["data"]): Promise<void> {
     return new Promise<void>(async (res, rej) => {
-      const datas = await this.client.request(
+      const datas = await this.client.publish(
         this.subject,
         JSON.stringify(data),
         (reply: any, err?: Error) => {
@@ -20,7 +19,6 @@ export abstract class Publisher<T extends Event> {
           return rej();
         }
       );
-      return res(datas);
     });
   }
 }
