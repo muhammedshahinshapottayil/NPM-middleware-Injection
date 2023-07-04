@@ -18,7 +18,7 @@ export abstract class Listener<T extends Event> {
   subscriptionOptions() {
     return this.client
       .subscriptionOptions()
-      .setStartWithLastReceived()
+      .setDeliverAllAvailable()
       .setManualAckMode(true)
       .setAckWait(this.ackWait)
       .setDurableName(this.queueGroupName);
