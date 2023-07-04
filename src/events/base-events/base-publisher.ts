@@ -11,7 +11,7 @@ export abstract class Publisher<T extends Event> {
   }
   async publish(data: T["data"]): Promise<void> {
     return new Promise<void>(async (res, rej) => {
-      const datas = await this.client.publish(
+      await this.client.request(
         this.subject,
         JSON.stringify(data),
         (reply: any, err?: Error) => {
