@@ -30,9 +30,12 @@ export abstract class Listener<T extends Event> {
   async listen() {
     this.subscription = await this.client.subscribe(
       this.subject,
-      this.subscriptionOptions()
+      this.subscriptionOptions(),
+      (msg: Msg, replyTo: any) => {
+        const parsedData = this.parseMessage(msg);
+        this.onMessage(parsedData, msg, replyTo);
+      }
     );
-    console.log(this.subscription);
 
     this.subscription.on("message", (msg: Msg, replyTo: any) => {
       const parsedData = this.parseMessage(msg);
