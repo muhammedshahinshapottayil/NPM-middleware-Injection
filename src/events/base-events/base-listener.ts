@@ -36,11 +36,6 @@ export abstract class Listener<T extends Event> {
         this.onMessage(parsedData, msg, replyTo);
       }
     );
-
-    // this.subscription.on("message", (msg: Msg, replyTo: any) => {
-    //   const parsedData = this.parseMessage(msg);
-    //   this.onMessage(parsedData, msg, replyTo);
-    // });
   }
 
   parseMessage(msg: Msg) {
