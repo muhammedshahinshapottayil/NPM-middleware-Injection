@@ -27,8 +27,8 @@ export abstract class Listener<T extends Event> {
     };
   }
 
-  listen() {
-    this.subscription = this.client.subscribe(
+  async listen() {
+    this.subscription = await this.client.subscribe(
       this.subject,
       this.subscriptionOptions()
     );
