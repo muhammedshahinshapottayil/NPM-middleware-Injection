@@ -32,15 +32,12 @@ export abstract class Listener<T extends Event> {
       this.subject,
       this.subscriptionOptions(),
       (msg: Msg, replyTo: any) => {
+        console.log(msg.data);
+        
         const parsedData = this.parseMessage(msg);
         this.onMessage(parsedData, msg, replyTo);
       }
     );
-
-    // this.subscription.on("message", (msg: Msg, replyTo: any) => {
-    //   const parsedData = this.parseMessage(msg);
-    //   this.onMessage(parsedData, msg, replyTo);
-    // });
   }
 
   parseMessage(msg: Msg) {
