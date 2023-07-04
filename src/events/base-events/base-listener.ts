@@ -1,4 +1,4 @@
-import nats, { Msg } from "nats";
+import nats, { Msg, Subscription } from "nats";
 import { Subjects } from "../subjects/Subjects";
 
 interface Event {
@@ -12,6 +12,7 @@ export abstract class Listener<T extends Event> {
   abstract onMessage(data: T["data"], msg: Msg, replyTo: any): void;
   protected client: any;
   protected ackWait = 5 * 1000;
+  protected subscription?: Subscription | any;
 
   constructor(client: any) {
     this.client = client;
@@ -27,12 +28,12 @@ export abstract class Listener<T extends Event> {
   }
 
   listen() {
-    const subscription = this.client.subscribe(
+    this.subscription = this.client.subscribe(
       this.subject,
       this.subscriptionOptions()
     );
 
-    subscription.on("message", (msg: Msg, replyTo: any) => {
+    this.subscription.on("message", (msg: Msg, replyTo: any) => {
       const parsedData = this.parseMessage(msg);
       this.onMessage(parsedData, msg, replyTo);
     });
