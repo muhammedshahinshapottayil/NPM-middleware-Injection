@@ -1,4 +1,4 @@
-import nats, { Msg, Subscription } from "nats";
+import { Msg, Subscription } from "nats";
 import { Subjects } from "../subjects/Subjects";
 
 interface Event {
@@ -32,6 +32,7 @@ export abstract class Listener<T extends Event> {
       this.subject,
       this.subscriptionOptions()
     );
+    console.log(this.subscription);
 
     this.subscription.on("message", (msg: Msg, replyTo: any) => {
       const parsedData = this.parseMessage(msg);
