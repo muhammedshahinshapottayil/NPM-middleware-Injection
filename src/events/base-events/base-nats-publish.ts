@@ -13,15 +13,14 @@ export abstract class RequestPublisher<T extends Event> {
   async publish(data: T["data"]): Promise<any> {
     return new Promise<any>(async (res, rej) => {
       try {
-        await this.client
-          .request(this.subject, JSON.stringify(data), {
+        const response = await this.client.request(
+          this.subject,
+          JSON.stringify(data),
+          {
             timeout: 5000,
-          })
-          .then((response: any) => {
-            console.log(response.data);
-            
-            return res(response.data);
-          });
+          }
+        );
+        return res(response);
       } catch (error) {
         return rej(error);
       }
