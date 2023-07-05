@@ -29,13 +29,11 @@ export abstract class Listener<T extends Event> {
 
   async listen() {
     const sub = this.client.subscribe(this.subject);
-    (async () => {
-      for await (const m of sub) {
-        console.log(`[${sub.getProcessed()}]: ${m.data}`);
-        const parsedData = this.parseMessage(m);
-        this.onMessage(parsedData, m);
-      }
-    })();
+    for await (const m of sub) {
+      // console.log(`[${sub.getProcessed()}]: ${m.data}`);
+      const parsedData = this.parseMessage(m);
+      this.onMessage(parsedData, m);
+    }
 
     // this.subscription = await this.client.subscribe(
     //   this.subject,
