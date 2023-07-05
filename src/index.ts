@@ -8,7 +8,9 @@ export * from "./middleware/isAuth";
 export * from "./middleware/requestValidationerr";
 
 export * from "./events/base-events/base-listener";
+export * from "./events/base-events/base-nats-listener";
 export * from "./events/base-events/base-publisher";
+export * from "./events/base-events/base-nats-publish";
 export * from "./events/created-events/user-created-events";
 export * from "./events/reply-events/dep-by-id-event";
 
