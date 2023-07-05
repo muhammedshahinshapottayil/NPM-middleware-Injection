@@ -20,6 +20,8 @@ export abstract class RequestPublisher<T extends Event> {
             timeout: 5000,
           }
         );
+        console.log(reply);
+        
         return res(reply);
       } catch (error) {
         return rej(error);
