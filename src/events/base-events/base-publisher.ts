@@ -11,13 +11,13 @@ export abstract class Publisher<T extends Event> {
   }
   async publish(data: T["data"]): Promise<void> {
     return new Promise<void>(async (res, rej) => {
-      await this.client.request(
+      await this.client.publish(
         this.subject,
         JSON.stringify(data),
-        (reply: any, err?: Error) => {
-          if (!err) return res(reply);
-          return rej();
-        }
+        // (reply: any, err?: Error) => {
+        //   if (!err) return res(reply);
+        //   return rej();
+        // }
       );
     });
   }
