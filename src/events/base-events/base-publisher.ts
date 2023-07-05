@@ -10,8 +10,6 @@ export abstract class Publisher<T extends Event> {
     this.client = client;
   }
   async publish(data: T["data"]): Promise<void> {
-    console.log(data);
-    
     return new Promise<void>((res, rej) => {
       this.client.publish(this.subject, JSON.stringify(data));
       return res();
