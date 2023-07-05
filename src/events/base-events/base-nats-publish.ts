@@ -17,8 +17,8 @@ export abstract class RequestPublisher<T extends Event> {
           .request(this.subject, JSON.stringify(data), {
             timeout: 5000,
           })
-          .then((res: any) => {
-            return res(res.data);
+          .then((response: any) => {
+            return res(response.data);
           });
       } catch (error) {
         return rej(error);
