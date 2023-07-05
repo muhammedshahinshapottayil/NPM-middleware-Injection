@@ -9,7 +9,7 @@ interface Event {
 export abstract class Listener<T extends Event> {
   abstract subject: T["subject"];
   abstract queueGroupName: string;
-  abstract onMessage(data: T["data"], msg: Msg, replyTo: any): void;
+  abstract onMessage(data: T["data"], msg: Msg): void;
   protected client: any;
   protected ackWait = 5 * 1000;
   protected subscription?: any;
@@ -28,14 +28,23 @@ export abstract class Listener<T extends Event> {
   }
 
   async listen() {
-
-
-    const sub = this.client.subscribe(Subjects.getDepartment);
+    const sub = this.client.subscribe(this.subject);
     (async () => {
       for await (const m of sub) {
         console.log(`[${sub.getProcessed()}]: ${m.data}`);
+        const parsedData = this.parseMessage(m);
+        this.onMessage(parsedData, m);
       }
     })();
+
+    // this.subscription = await this.client.subscribe(
+    //   this.subject,
+    //   this.subscriptionOptions(),
+    //   (msg: Msg, replyTo: any) => {
+    //     const parsedData = this.parseMessage(msg);
+    //     this.onMessage(parsedData, msg);
+    //   }
+    // );
   }
 
   parseMessage(msg: Msg) {
