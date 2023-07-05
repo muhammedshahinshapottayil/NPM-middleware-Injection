@@ -18,6 +18,8 @@ export abstract class RequestPublisher<T extends Event> {
             timeout: 5000,
           })
           .then((response: any) => {
+            console.log(response.data);
+            
             return res(response.data);
           });
       } catch (error) {
