@@ -28,14 +28,14 @@ export abstract class Listener<T extends Event> {
   }
 
   async listen() {
-    this.subscription = await this.client.subscribe(
-      this.subject,
-      this.subscriptionOptions(),
-      (msg: Msg, replyTo: any) => {
-        const parsedData = this.parseMessage(msg);
-        this.onMessage(parsedData, msg, replyTo);
+
+
+    const sub = this.client.subscribe(Subjects.getDepartment);
+    (async () => {
+      for await (const m of sub) {
+        console.log(`[${sub.getProcessed()}]: ${m.data}`);
       }
-    );
+    })();
   }
 
   parseMessage(msg: Msg) {
