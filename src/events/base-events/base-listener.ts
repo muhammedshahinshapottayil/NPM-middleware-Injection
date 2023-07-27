@@ -7,8 +7,8 @@ interface Event {
 }
 
 export abstract class Listener<T extends Event> {
-  abstract subject: T["subject"];
-  abstract queueGroupName: string;
+  abstract subject?: T["subject"];
+  abstract queueGroupName?: string;
   abstract onMessage(data: T["data"], msg: Msg): void;
   protected client: any;
   protected ackWait = 5 * 1000;
@@ -28,7 +28,7 @@ export abstract class Listener<T extends Event> {
   }
 
   async listen() {
-    const sub = this.client.subscribe(this.subject);
+    const sub = this.client.subscribe(this.subject ?? "user:saveToChat");
     for await (const m of sub) {
       // console.log(`[${sub.getProcessed()}]: ${m.data}`);
       const parsedData = this.parseMessage(m);
