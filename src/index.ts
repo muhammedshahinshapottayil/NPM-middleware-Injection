@@ -16,6 +16,8 @@ export * from "./events/base-events/base-nats-publish";
 export * from "./events/created-events/user-created-events";
 export * from "./events/created-events/assign-task-event";
 export * from "./events/created-events/get-task-details-event";
+export * from "./events/created-events/save-to chat-event";
+
 
 
 export * from "./events/reply-events/dep-by-id-event";

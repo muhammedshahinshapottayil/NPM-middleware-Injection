@@ -3,4 +3,5 @@ export enum Subjects {
   getDepartmentReply = "dep&task:getDepartmentReply",
   getUserDataNotAssigned = "user:getUserData",
   getTaskDetails = "dep&task:getTaskData",
+  saveToChat = "user:saveToChat",
 }
